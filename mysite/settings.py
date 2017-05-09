@@ -25,7 +25,7 @@ SECRET_KEY = 'u8r^w&e+u8ekj64*240zj%mte##j^tgm=*bg3n%yp00zijdo=7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com','localhost']
 
 
 # Application definition
@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',	
+    'blog',
+    'oauth2_provider',
+    'corsheaders',
+    'registration',		
 ]
 
 MIDDLEWARE = [
@@ -48,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -114,9 +118,22 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+CORS_ORIGIN_ALLOW_ALL=True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'Static')
+
+#registration
+# If True, users can register
+REGISTRATION_OPEN = True
+# One-week activation window; you may, of course, use a different value.
+ACCOUNT_ACTIVATION_DAYS = 7
+# If True, the user will be automatically logged in.
+REGISTRATION_AUTO_LOGIN = True
+# The page you want users to arrive at after they successfully log in
+LOGIN_REDIRECT_URL = '/blog/'
+# The page users are directed to if they are not logged in,
+# and are trying to access pages requiring authentication
+LOGIN_URL = '/accounts/login/'
